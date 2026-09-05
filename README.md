@@ -5,6 +5,12 @@
 
 It's a simple Windows application, which adds context menu item on executable apps to add it to Steam Library
 
+This is a fork of [mops1k/SteamShortcut](https://github.com/mops1k/SteamShortcut) with the following changes:
+
+- Added `.lnk` shortcut support — the context menu now also appears on shortcut files, not just `.exe` files, and the shortcut's target executable is resolved automatically.
+- `shortcuts.vdf` is now created automatically if it doesn't exist yet, instead of failing with an error and requiring you to add a non-Steam game through Steam's own UI first.
+- Fixed a bug where added games were silently written with the wrong field name casing (`appName`/`exe` instead of `AppName`/`Exe`) and never actually showed up in the Steam library, even though the app reported success.
+
 ## Requirements
 
 - [Steam Client for Windows](https://store.steampowered.com/about/)
