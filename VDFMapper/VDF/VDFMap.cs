@@ -53,16 +53,16 @@ public class VDFMap : VDFBaseType
     public void FillWithDefaultShortcutEntry()
     {
         Map.Add("appid", new VDFInteger((uint)random.Next()));
-        Map.Add("appName", new VDFString("appName"));
-        Map.Add("exe", new VDFString(""));
+        Map.Add("AppName", new VDFString(""));
+        Map.Add("Exe", new VDFString(""));
         Map.Add("StartDir", new VDFString("."));
         Map.Add("icon", new VDFString(""));
         Map.Add("ShortcutPath", new VDFString(""));
         Map.Add("LaunchOptions", new VDFString(""));
-        Map.Add("isHidden", new VDFInteger(0));
+        Map.Add("IsHidden", new VDFInteger(0));
         Map.Add("AllowDesktopConfig", new VDFInteger(1));
         Map.Add("AllowOverlay", new VDFInteger(1));
-        Map.Add("openvr", new VDFInteger(0));
+        Map.Add("OpenVR", new VDFInteger(0));
         Map.Add("Devkit", new VDFInteger(0));
         Map.Add("DevkitGameID", new VDFString("0"));
         Map.Add("DevkitOverrideAppID", new VDFInteger(0));

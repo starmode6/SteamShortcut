@@ -26,14 +26,14 @@ public class ShortcutEntry
 
     public string? AppName
     {
-        get => ReadString("appName");
-        set => WriteString("appName", value);
+        get => ReadString("AppName");
+        set => WriteString("AppName", value);
     }
 
     public string? Exe
     {
-        get => ReadString("exe");
-        set => WriteString("exe", value);
+        get => ReadString("Exe");
+        set => WriteString("Exe", value);
     }
 
     public string? StartDir
@@ -80,8 +80,8 @@ public class ShortcutEntry
 
     public uint Openvr
     {
-        get => ReadInt("openvr");
-        set => WriteInt("openvr", value);
+        get => ReadInt("OpenVR");
+        set => WriteInt("OpenVR", value);
     }
 
     public uint Devkit
