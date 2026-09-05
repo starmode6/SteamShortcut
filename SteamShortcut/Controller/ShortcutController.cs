@@ -8,15 +8,26 @@ public class ShortcutController(Service.SteamShortcut steamShortcut, SteamProces
 {
     public void Invoke(params object[]? args)
     {
-        if (args?.FirstOrDefault() is not string exePath)
+        if (args?.FirstOrDefault() is not string targetPath)
         {
             return;
         }
 
-        if (!Path.Exists(exePath))
+        if (!Path.Exists(targetPath))
         {
-            logger.Error($"Cannot find executable path: {exePath}");
+            logger.Error($"Cannot find executable path: {targetPath}");
             return;
+        }
+
+        string? exePath = targetPath;
+        if (Path.GetExtension(targetPath).Equals(".lnk", StringComparison.OrdinalIgnoreCase))
+        {
+            exePath = ShortcutLinkResolver.ResolveTarget(targetPath);
+            if (string.IsNullOrEmpty(exePath) || !Path.Exists(exePath))
+            {
+                logger.Error($"Could not resolve shortcut target: {targetPath}");
+                return;
+            }
         }
 
         if (!steamShortcut.InitialisePaths())
