@@ -1,4 +1,5 @@
-﻿using Logger;
+﻿using System.Text;
+using Logger;
 using SteamShortcut.Form;
 using SteamShortcut.Model;
 using VDFMapper.ShortcutConfig;
@@ -52,7 +53,30 @@ public class SteamShortcut(ILogger logger, SteamUserDialog userDialog)
 
         _vdfPath = SteamShortcutPath.GetShortcutsPath((int)userId);
 
+        EnsureShortcutsFileExists();
+
         return true;
+    }
+
+    private void EnsureShortcutsFileExists()
+    {
+        if (File.Exists(_vdfPath))
+        {
+            return;
+        }
+
+        string? directory = Path.GetDirectoryName(_vdfPath);
+        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        using BinaryWriter writer = new(new FileStream(_vdfPath, FileMode.Create));
+        writer.Write((byte)VDFType.MapStart);
+        writer.Write(Encoding.UTF8.GetBytes("shortcuts"));
+        writer.Write((byte)0);
+        writer.Write((byte)VDFType.MapEnd);
+        writer.Write((byte)VDFType.MapEnd);
     }
 
     public bool Add(string path)
